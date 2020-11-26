@@ -9,7 +9,7 @@ using namespace std;
 
 int main() {
 	string abc = "xx";
-	PBentry n("rohan", abc);
+	PBnode n("rohan", abc);
 
 }
 

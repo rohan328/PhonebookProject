@@ -23,12 +23,21 @@ bool PBentry::setEmail(string email) {
 	if (email.empty()) return false;
 	this->email = email;
 	return true;
-
-
 }
 
-bool PBentry::setPhoneNumber(string) {
-
-	return false;
+bool PBentry::setPhoneNumber(string phoneNumber) {
+	this->phoneNumber = phoneNumber;
+	return true;
 }
 
+string PBentry::getFirstName() { return firstName; }
+
+string PBentry::getLastName() { return lastName; }
+
+string PBentry::getEmail() { return email; }
+
+string PBentry::getPhoneNumber() { return phoneNumber; }
+
+PBnode::PBnode(string firstName, string lastName, string email, string phoneNumber)
+	: PBentry(firstName, lastName, email, phoneNumber) {
+}

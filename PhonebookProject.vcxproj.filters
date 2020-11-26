@@ -18,18 +18,18 @@
     <ClCompile Include="PhonebookProject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LinkedList.cpp">
+    <ClCompile Include="PBentry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PBentry.cpp">
+    <ClCompile Include="PhoneBook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="LinkedList.h">
+    <ClInclude Include="PBentry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PBentry.h">
+    <ClInclude Include="PhoneBook.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
