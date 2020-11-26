@@ -1,9 +1,10 @@
 #pragma once
 #include <string>
-
 using namespace std;
 
 class PBentry {
+	friend ostream& operator<<(ostream&, PBentry&);
+
 public:
 	PBentry(string, string,string="",string="");
 
@@ -19,7 +20,7 @@ public:
 	string getEmail();
 	string getPhoneNumber();
 
-protected:
+private:
 	string firstName;
 	string lastName;
 	string email;
@@ -31,7 +32,6 @@ class PBnode : public PBentry {
 public:
 	PBnode(string, string, string = "", string = "");
 
-private:
 	PBnode* next;
 	PBnode* prev;
 };

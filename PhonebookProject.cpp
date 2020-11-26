@@ -1,25 +1,98 @@
-// PhonebookProject.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
 #include "PBentry.h"
+#include "PhoneBook.h"
 
 using namespace std;
 
-
-int main() {
-	string abc = "xx";
-	PBnode n("rohan", abc);
-
+void wait() {
+	cin.ignore();
+	cout << "press enter to go back";
+	char x;
+	while (true) {
+		x = getchar();
+		if (x == '\n') return;
+	}
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
+int main() {
+	PhoneBook pb;
+	pb.restore();
+	char option = NULL;
+	while (true) {
+		system("cls");
+		
+		cout << "1. Display PhoneBook\n"
+			<< "2. Search(By first name)\n"
+			<< "3. Search(By last name)\n"
+			<< "4. Search(By Email)\n"
+			<< "5. Add new entry\n"
+			<< "6. Update an entry\n"
+			<< "7. Delete an entry\n"
+			<< "8. Save to database\n"
+			<< "9. Restore from database\n"
+			<< "D. Delete all entries\n"
+			<< "x. Exit\n";
+		cout << "Choose an option: ";
+		cin >> option;
+		
+		system("cls");
+		
+		switch (option) {
+		case '1':
+			pb.display();
+			wait();
+			break;
+		case '2':
+			pb.searchByFName();
+			wait();
+			break;
+		case '3':
+			pb.searchByLName();
+			wait();
+			break;
+		case '4':
+			pb.searchByEmail();
+			wait();
+			break;
+		case '5':
+			pb.add();
+			break;
+		case '6':
+			pb.update();
+			wait();
+			break;
+		case '7':
+			pb.deleteE();
+			wait();
+			break;
+		case '8':
+			pb.save();
+			break;
+		case '9':
+			pb.restore();
+			break;
+		case 'D':
+			pb.deleteAll();
+			break;
+		case 'x':
+			return 0;
+		}
+	}
+}
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+
+
+/*
+Realtime input
+int main ()
+{
+  char c;
+  puts ("Enter text. Include a dot ('.') in a sentence to exit:");
+  do {
+	c=getchar();
+	putchar (c);
+  } while (c != '.');
+  return 0;
+}
+
+*/

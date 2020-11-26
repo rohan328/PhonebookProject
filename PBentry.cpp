@@ -1,4 +1,6 @@
 #include "PBentry.h"
+#include <iostream>
+#include <iomanip>
 
 PBentry::PBentry(string firstName, string lastName, string email, string phoneNumber) {
 	this->firstName = firstName;
@@ -40,4 +42,14 @@ string PBentry::getPhoneNumber() { return phoneNumber; }
 
 PBnode::PBnode(string firstName, string lastName, string email, string phoneNumber)
 	: PBentry(firstName, lastName, email, phoneNumber) {
+	next = NULL;
+	prev = NULL;
+}
+
+ostream& operator<<(ostream& os, PBentry& data) {
+	os << "First Name: " << data.firstName << endl
+		<< setw(4) << "" << "  Last Name: " << data.lastName << endl
+		<< setw(4) << "" << "  Email: " << data.email << endl
+		<< setw(4) << "" << "  Phone Number: " << data.phoneNumber;
+	return os;
 }
