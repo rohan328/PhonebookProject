@@ -4,15 +4,6 @@
 
 using namespace std;
 
-void wait() {
-	cin.ignore();
-	cout << "press enter to go back";
-	char x;
-	while (true) {
-		x = getchar();
-		if (x == '\n') return;
-	}
-}
 
 int main() {
 	PhoneBook pb;
@@ -40,36 +31,38 @@ int main() {
 		switch (option) {
 		case '1':
 			pb.display();
-			wait();
+			system("pause");
 			break;
 		case '2':
 			pb.searchByFName();
-			wait();
+			system("pause");
 			break;
 		case '3':
 			pb.searchByLName();
-			wait();
+			system("pause");
 			break;
 		case '4':
 			pb.searchByEmail();
-			wait();
+			system("pause");
 			break;
 		case '5':
 			pb.add();
 			break;
 		case '6':
 			pb.update();
-			wait();
+			system("pause");
 			break;
 		case '7':
 			pb.deleteE();
-			wait();
+			system("pause");
 			break;
 		case '8':
 			pb.save();
+			system("pause");
 			break;
 		case '9':
 			pb.restore();
+			system("pause");
 			break;
 		case 'D':
 			pb.deleteAll();
