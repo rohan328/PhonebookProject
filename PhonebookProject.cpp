@@ -19,8 +19,8 @@ int main() {
 			<< "5. Add new entry\n"
 			<< "6. Update an entry\n"
 			<< "7. Delete an entry\n"
-			<< "8. Save to database\n"
-			<< "9. Restore from database\n"
+			<< "8. Save to database (WARNING: This will overwrite existing data in file)\n"
+			<< "9. Restore from database(WARNING: This will overwrite existing data in the list)\n"
 			<< "D. Delete all entries\n"
 			<< "x. Exit\n";
 		cout << "Choose an option: ";
