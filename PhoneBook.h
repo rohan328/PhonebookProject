@@ -13,14 +13,15 @@ public:
 	void searchByEmail();
 	void add();
 	void update();
-	void deleteE();
+	void deleteE(int);
 	void save();
 	void restore();
 	void deleteAll();
 
 private:
 	//functions
-	void insertEnd(PBnode*); // for testing purposes
+	void insertEnd(PBnode*); 
+	void insertInOrder(PBnode*); //sorts by firstname
 	void destructPhoneBook(PBnode*); // deletes all the dynamically allocated nodes
 
 	//data

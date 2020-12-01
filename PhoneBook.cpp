@@ -13,7 +13,7 @@ PhoneBook::~PhoneBook() {
 	destructPhoneBook(head);
 }
 
-//complete
+//display the whole phonebook/list
 void PhoneBook::display() {
 	PBnode* temp = head;
 	for (int i = 1;i <= size;i++) {
@@ -23,7 +23,7 @@ void PhoneBook::display() {
 	}
 }
 
-//complete
+//search entries by first name
 void PhoneBook::searchByFName() {
 	char option = 'a';
 
@@ -55,7 +55,7 @@ void PhoneBook::searchByFName() {
 	
 }
 
-//complete
+//search entries by last name
 void PhoneBook::searchByLName() {
 	char option = 'a';
 
@@ -86,7 +86,7 @@ void PhoneBook::searchByLName() {
 	}
 }
 
-//complete
+//search entries by email
 void PhoneBook::searchByEmail() {
 	char option = 'a';
 
@@ -117,7 +117,7 @@ void PhoneBook::searchByEmail() {
 	}
 }
 
-//complete   replace insertEnd with insertInOrder
+//add entries to phone book, inserts by first name
 void PhoneBook::add() {
 	cin.ignore();
 	string fName;
@@ -165,10 +165,10 @@ void PhoneBook::add() {
 		}
 	}*/
 	PBnode* temp = new PBnode(fName, lName, email, phoneNumber);
-	insertEnd(temp);
+	insertInOrder(temp);
 }
 
-//almost complete
+//updates the fields and moves to right location according to the first name
 void PhoneBook::update() {
 	display();
 	cout << endl << "Enter the index number of the entry to update: ";
@@ -184,35 +184,43 @@ void PhoneBook::update() {
 		temp = temp->next;
 	}
 
-	cout << *temp<<endl;
+	PBnode* newTemp = new PBnode(*temp);
+	newTemp->next = NULL;
+	newTemp->prev = NULL;
+	deleteE(n);
+
+	cout << *newTemp<<endl;
 
 	string newData;
 	cout << "Enter new first name: ";
 	cin >> newData;
-	temp->setFirstName(newData);
+	newTemp->setFirstName(newData);
 	cout << "Enter new last name: ";
 	cin >> newData;
-	temp->setLastName(newData);
+	newTemp->setLastName(newData);
 	cout << "Enter new Email: ";
 	cin >> newData;
-	temp->setEmail(newData);
+	newTemp->setEmail(newData);
 	cout << "Enter new phone number: ";
 	cin >> newData;
-	temp->setPhoneNumber(newData);
+	newTemp->setPhoneNumber(newData);
+
+	insertInOrder(newTemp);
 
 }
 
-//complete
-void PhoneBook::deleteE() {
-	display();
-	cout << endl << "Enter the index number of the entry to delete: ";
-	int n;
-	cin >> n;
-	if (n<1 || n>size) {
-		cout << "Invalid index number entered. Returning to main menu.\n";
-		return;
+//deletes the selected entry
+void PhoneBook::deleteE(int n=NULL) {
+	if (n == NULL) {
+		display();
+		cout << endl << "Enter the index number of the entry to delete: ";
+		cin >> n;
+		if (n<1 || n>size) {
+			cout << "Invalid index number entered. Returning to main menu.\n";
+			return;
+		}
 	}
-
+	
 	if (size == 1) {
 		delete head;
 		head = NULL;
@@ -249,7 +257,7 @@ void PhoneBook::deleteE() {
 
 }
 
-//complete
+//saves the entire list from memory to file, overwrites previous data
 void PhoneBook::save() {
 	ofstream data("phonebook.pb");
 	if (data.fail()) {
@@ -269,7 +277,7 @@ void PhoneBook::save() {
 
 }
 
-//complete
+//restores data from file, overwrites previous data in list
 void PhoneBook::restore() {
 	deleteAll();
 
@@ -295,7 +303,7 @@ void PhoneBook::restore() {
 	}
 }
 
-//complete
+//delete all the entries in the list
 void PhoneBook::deleteAll() {
 	destructPhoneBook(head);
 	head = NULL;
@@ -303,7 +311,7 @@ void PhoneBook::deleteAll() {
 	size = 0;
 }
 
-//complete TODO->insert in order
+//inserts data to the end of the list
 void PhoneBook::insertEnd(PBnode* data) {
 	if (head == NULL) {
 		head = data;
@@ -317,7 +325,42 @@ void PhoneBook::insertEnd(PBnode* data) {
 	size++;
 }
 
-//complete
+//inserts data in order(first name)
+void PhoneBook::insertInOrder(PBnode* data) {
+	if (head == NULL) {
+		insertEnd(data);
+		return;
+	}
+
+	PBnode* temp = head;
+
+	while (temp!=NULL) {
+		if (data->getFirstName() < temp->getFirstName()) {
+			if (temp == head) {
+				data->next = temp;
+				data->prev = NULL;
+				temp->prev = data;
+				head = data;
+				size++;
+				return;
+			}
+			data->prev = temp->prev;
+			data->next = temp;
+			temp->prev->next = data;
+			temp->prev = data;
+			size++;
+			return;
+		}
+		else {
+			temp = temp->next;
+		}
+	}
+
+	insertEnd(data);
+
+}
+
+//deletes all the dynamically allocated memory
 void PhoneBook::destructPhoneBook(PBnode* x) {
 	if (x == NULL) {
 		return;

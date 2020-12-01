@@ -53,7 +53,7 @@ int main() {
 			system("pause");
 			break;
 		case '7':
-			pb.deleteE();
+			pb.deleteE(NULL);
 			system("pause");
 			break;
 		case '8':
