@@ -2,7 +2,6 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
-#include <conio.h>
 
 PhoneBook::PhoneBook() {
 	head = NULL;
@@ -169,14 +168,88 @@ void PhoneBook::add() {
 	insertEnd(temp);
 }
 
+//almost complete
 void PhoneBook::update() {
+	display();
+	cout << endl << "Enter the index number of the entry to update: ";
+	int n;
+	cin >> n;
+	if (n<1 || n>size) {
+		cout << "Invalid index number entered. Returning to main menu.\n";
+		return;
+	}
+
+	PBnode *temp = head;
+	for (int i = 0;i < n - 1;i++) {
+		temp = temp->next;
+	}
+
+	cout << *temp<<endl;
+
+	string newData;
+	cout << "Enter new first name: ";
+	cin >> newData;
+	temp->setFirstName(newData);
+	cout << "Enter new last name: ";
+	cin >> newData;
+	temp->setLastName(newData);
+	cout << "Enter new Email: ";
+	cin >> newData;
+	temp->setEmail(newData);
+	cout << "Enter new phone number: ";
+	cin >> newData;
+	temp->setPhoneNumber(newData);
 
 }
 
+//complete
 void PhoneBook::deleteE() {
 	display();
+	cout << endl << "Enter the index number of the entry to delete: ";
+	int n;
+	cin >> n;
+	if (n<1 || n>size) {
+		cout << "Invalid index number entered. Returning to main menu.\n";
+		return;
+	}
+
+	if (size == 1) {
+		delete head;
+		head = NULL;
+		tail = NULL;
+		size = 0;
+		return;
+	}
+
+	PBnode* temp = head;
+	for (int i = 0;i < n - 1;i++) {
+		temp = temp->next;
+	}
+
+	if (temp == head) {
+		head = temp->next;
+		head->prev = NULL;
+		delete temp;
+		size--;
+		return;
+	}
+
+	if (temp == tail) {
+		tail = temp->prev;
+		tail->next = NULL;
+		delete temp;
+		size--;
+		return;
+	}
+
+	temp->prev->next = temp->next;
+	temp->next->prev = temp->prev;
+	delete temp;
+	size--;
+
 }
 
+//complete
 void PhoneBook::save() {
 	ofstream data("phonebook.pb");
 	if (data.fail()) {
@@ -196,6 +269,7 @@ void PhoneBook::save() {
 
 }
 
+//complete
 void PhoneBook::restore() {
 	deleteAll();
 
@@ -221,6 +295,7 @@ void PhoneBook::restore() {
 	}
 }
 
+//complete
 void PhoneBook::deleteAll() {
 	destructPhoneBook(head);
 	head = NULL;
@@ -228,6 +303,7 @@ void PhoneBook::deleteAll() {
 	size = 0;
 }
 
+//complete TODO->insert in order
 void PhoneBook::insertEnd(PBnode* data) {
 	if (head == NULL) {
 		head = data;
@@ -241,6 +317,7 @@ void PhoneBook::insertEnd(PBnode* data) {
 	size++;
 }
 
+//complete
 void PhoneBook::destructPhoneBook(PBnode* x) {
 	if (x == NULL) {
 		return;
