@@ -4,7 +4,6 @@
 
 using namespace std;
 
-
 int main() {
 	PhoneBook pb;
 	pb.restore();
@@ -73,19 +72,3 @@ int main() {
 	}
 }
 
-
-
-/*
-Realtime input
-int main ()
-{
-  char c;
-  puts ("Enter text. Include a dot ('.') in a sentence to exit:");
-  do {
-	c=getchar();
-	putchar (c);
-  } while (c != '.');
-  return 0;
-}
-
-*/

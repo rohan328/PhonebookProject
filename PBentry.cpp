@@ -46,6 +46,7 @@ PBnode::PBnode(string firstName, string lastName, string email, string phoneNumb
 	prev = NULL;
 }
 
+//overload << operator for displaying list on screen
 ostream& operator<<(ostream& os, PBentry& data) {
 	os << "First Name: " << data.firstName << endl
 		<< setw(4) << "" << "  Last Name: " << data.lastName << endl
